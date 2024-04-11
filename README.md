@@ -8,7 +8,7 @@ O 1BRC: https://github.com/gunnarmorling/1brc/.
 
 ## Como executar
 
-- Baixe seu binãrio do zig [aqui!](https://ziglang.org/download/).
+- Baixe seu binário do zig [aqui!](https://ziglang.org/download/).
      - Estou usando a versão `0.11.0`
 
 - Dentro do repositório, rode `zig build -Doptimize=ReleaseFast` para buildar.
@@ -17,14 +17,18 @@ O 1BRC: https://github.com/gunnarmorling/1brc/.
 
 - Pronto! Agora execute `time ./zig-out/bin/1brc-zig measurements.txt` e veja seu tempo!
 
+> Utilizar um cache fresco é permitido pelo desafio. Rode o teste duas vezes para ter um melhor desempenho: `(cd zig-out/bin && .1brc-zig && time ./1brc-zig)`
+
 ## Benchmarks
 
 Asus Zenbook 14 ux435, com Core i7-1165G7, 8gb LPDDR4X e SSD NVME PCIe 3.0 (Fedora 39, linux 6.8.4): **11.98 segundos**
 ```
 37.90s user 4.74s system 355% cpu 11.983 total
 ```
-   
-Desktop com Ryzen 5 3600, 16gb DDR4 @ 2600mhz e SSD NVME (Fedora 39, linux 6.7.7): **5.13 segundos**
+
+Desktop com Ryzen 5 3600, 16gb DDR4 @ 2600mhz e SSD NVME (Fedora 39, linux 6.7.7): **4.63 segundos**
 ```
-39.91s user 5.81s system 890% cpu 05.134 total
+40.42s user 1.42s system 903% cpu 4.631 total
 ```
+
+> Ao contrário do que parece, a quantidade de memória RAM não importa. O principal fator para melhor o desempenho é a quantidade de threads do seu processador.
