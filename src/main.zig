@@ -1,23 +1,46 @@
+// 
+// 
+// 
+// 
+// 
+//      @: Representa as funções especificas do compilador
+// 
+
 const std = @import("std");
 const builtin = @import("builtin");
 
+// Define a qu
 const MAP_CAPACITY = 512 * 2 * 2;
 
+// Um alias para o tipo "signed int 32bits"
 const T = i32;
+// Um alias para o tipo "float 32bits"
 const F = f32;
 
+// O tipo Stat define uma estátistica, ou seja, os dados de um local.
+//      ou melhor ainda, uma linha do arquivo do 1BRC.
+
+// Struct que vai salvar estatísticas.
+// Quando encontrarmos novas estátisticas para um local já salvo, vamos mesclar as estatísticas.
 const Stat = struct {
+    // Vai salvar o menor valor encontrado
     min: F,
+    // Vai salvar o maior valor encontrado
     max: F,
+    // Vai a soma de todos os valores encontrados
     sum: F,
+    // Vai salvar a quantidade de valores encontrados
     count: u32,
 
+    // Faz o merge entre duas estatísticas
     pub fn mergeIn(self: *Stat, other: Stat) void {
         self.min = @min(self.min, other.min);
         self.max = @max(self.max, other.max);
         self.sum += other.sum;
         self.count += other.count;
     }
+
+    // Adiciona um novo dado (float) à estatística
     pub fn addItem(self: *Stat, item: F) void {
         self.min = @min(self.min, item);
         self.max = @max(self.max, item);
@@ -26,10 +49,16 @@ const Stat = struct {
     }
 };
 
+// Define uma estrutura de Contexto que será usado por cada worker
 const WorkerCtx = struct {
+
+    // Aqui criamos um Hashmap que vai apontar o nome de um local para uma Stat
     map: std.StringHashMap(Stat),
+    // E aqui um array de bytes que vai salvar o nome dos locais pelos quais esse contexto passou
     countries: std.ArrayList([]const u8),
 
+    // Inicializa o WorkerCtx, e recebe um locador de memória
+    // A ! no retorno da função indica que ela pode falhar e retornar um erro
     pub fn init(allocator: std.mem.Allocator) !WorkerCtx {
         var self: WorkerCtx = undefined;
         self.map = std.StringHashMap(Stat).init(allocator);
