@@ -1,29 +1,30 @@
 # 1BRC-zig
 
-This is based on the challenge here: https://github.com/gunnarmorling/1brc/.
+O 1BRC: https://github.com/gunnarmorling/1brc/.
 
 > The One Billion Row Challenge (1BRC) is a fun exploration of how far modern Java can be pushed for aggregating one billion rows from a text file. 
 > Grab all your (virtual) threads, reach out to SIMD, optimize your GC, or pull any other trick, and create the fastest implementation for solving this task!
 
-I decided to implement this in Zig as a learning experience.
 
-# Run
+## Como executar
 
-First, you'll need a Zig binary from here: https://ziglang.org/download/.
-I'm using the latest master version: `zig-0.12.0-dev.2059`.
+- Baixe seu binãrio do zig [aqui!](https://ziglang.org/download/).
+     - Estou usando a versão `0.11.0`
 
-Then run `zig build -Doptimize=ReleaseFast` to build.
+- Dentro do repositório, rode `zig build -Doptimize=ReleaseFast` para buildar.
 
-If you don't already have a `measurements.txt` file available, run `./zig-out/bin/run-create-sample 1000000000` to build your ~12GB input file.
-This can take several minutes.
+- Caso ainda não o tenha, use o o binário `run-create-sample` para criar seu arquivo TXT com 1 bilhão de linhas **(~12GB)**: `./zig-out/bin/run-create-sample 1000000000` *(Isso deve levar de 3 a 5 minutos)*
 
-Now run `time ./zig-out/bin/1brc-zig measurements.txt`. 
+- Pronto! Agora execute `time ./zig-out/bin/1brc-zig measurements.txt` e veja seu tempo!
 
-With a warm cache (as allowed by the challenge rules), I get this time on my AMD Ryzen 7 5800H:
+## Benchmarks
 
+Asus Zenbook 14 ux435, com Core i7-1165G7, 8gb LPDDR4X e SSD NVME PCIe 3.0 (Fedora): **11.98 segundos**
 ```
-Executed in    5.76 secs    fish           external
-   usr time   37.81 secs  129.00 micros   37.81 secs
-   sys time   10.11 secs  526.00 micros   10.11 secs
+37.90s user 4.74s system 355% cpu 11.983 total
 ```
-
+   
+Desktop com Ryzen 5 3600, 16gb DDR4 @ 2600mhz e SSD NVME (Fedora): **5.13 segundos**
+```
+39.91s user 5.81s system 890% cpu 05.134 total
+```
