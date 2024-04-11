@@ -19,12 +19,12 @@ O 1BRC: https://github.com/gunnarmorling/1brc/.
 
 ## Benchmarks
 
-Asus Zenbook 14 ux435, com Core i7-1165G7, 8gb LPDDR4X e SSD NVME PCIe 3.0 (Fedora): **11.98 segundos**
+Asus Zenbook 14 ux435, com Core i7-1165G7, 8gb LPDDR4X e SSD NVME PCIe 3.0 (Fedora 39, linux 6.8.4): **11.98 segundos**
 ```
 37.90s user 4.74s system 355% cpu 11.983 total
 ```
    
-Desktop com Ryzen 5 3600, 16gb DDR4 @ 2600mhz e SSD NVME (Fedora): **5.13 segundos**
+Desktop com Ryzen 5 3600, 16gb DDR4 @ 2600mhz e SSD NVME (Fedora 39, linux 6.7.7): **5.13 segundos**
 ```
 39.91s user 5.81s system 890% cpu 05.134 total
 ```
